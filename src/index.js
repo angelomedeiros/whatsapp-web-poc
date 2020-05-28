@@ -1,13 +1,24 @@
 import { Client } from 'whatsapp-web.js';
 
+import Bot from './components/Bot';
+import Alert from './components/Alert';
+import Session from './components/Session';
+
 const client = new Client({
   puppeteer: {
-    headless: false,
+    headless: !!Session.get(),
   },
+  session: Session.get(),
 });
 
-client.on('ready', () => console.log('Client is ready'));
+const bot = new Bot(client);
 
-client.on('message', (message) => console.log(message));
+client.on('ready', () =>
+  Alert.showAlert('[BOT] Angelo Medeiros', 'Client is ready!')
+);
+
+client.on('authenticated', (session) => Session.save(session));
+
+client.on('message', (message) => bot.parseMessage(message));
 
 client.initialize();

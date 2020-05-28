@@ -6,10 +6,13 @@
   "license": "MIT",
   "dependencies": {
     "@pedroentringer/parser-command-line": "^1.0.1",
-    "sucrase": "^3.15.0",
     "whatsapp-web.js": "^1.6.0"
   },
   "scripts": {
-    "start": "sucrase-node src/index.js"
+    "start": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "sucrase": "^3.15.0",
+    "nodemon": "^2.0.4"
   }
 }
